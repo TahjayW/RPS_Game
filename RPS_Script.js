@@ -14,26 +14,27 @@ if (timeToPlay.toLocaleLowerCase() === 'yes') {
 
 function startGame() {
     //Assign values for RPS
-    let playerChoice = prompt("Type rock, paper or scisscors.");
-    let cpuChoice = CPU_Choice();
-    //convert player choice
-    let convertedPlayerChoice = convert_Choice();
+    let playerChoice = prompt("Type rock, paper or scissors.");
+    
+    
     //Check user input is valid
     if (isInputValid(playerChoice)) {
-
-        compareChoice(convert_Choice(playerChoice), cpuChoice);
+        let convertedPlayerChoice = convert_Choice(playerChoice);
+        let cpuChoice = CPU_Choice();
+        compareChoice(convertedPlayerChoice, cpuChoice);
     } else {
+        console.log("Invalid entry, please try again.");
         startGame();
     }
 
 
 }
 
-function convert_Choice(x) {
+function convert_Choice(playerChoice) {
     let convertedChoice;
-    if (x === 'rock') {
+    if (playerChoice === 'rock') {
         convertedChoice = 0;
-    } else if (x === 'paper') {
+    } else if (playerChoice === 'paper') {
         convertedChoice = 1;
 
     } else {
@@ -50,8 +51,11 @@ function CPU_Choice() {
 
 
 function isInputValid(someInput) {
-    if (someInput === 'string' && someInput.length != 0) {
-        return true;
+    if (typeof someInput === 'string' && someInput.length != 0) {
+        if (someInput.toLowerCase() === 'rock' || someInput.toLowerCase() === 'paper' || someInput.toLowerCase() === 'scissors') {
+            return true;
+        }
+
     }
     else {
         console.log("Invalid entry, please try again.");
@@ -61,12 +65,28 @@ function isInputValid(someInput) {
 }
 
 //a = player choice b = cpu choice
+// 0 rock 1 paper 2 scisscors
 function compareChoice(a, b) {
     if (a === b) {
         console.log("draw!");
     } else if ((a === 1 && b === 0) || (a === 2 && b === 1) || (a === 0 && b === 2)) {
         console.log("Player wins!");
+         
     } else {
         console.log("Player Loses!");
+         
     }
+    playAgain();
+}
+
+function playAgain(){
+
+let yesOrNo = prompt("Play again?");
+if(yesOrNo.toLowerCase() === 'yes'){
+    startGame();
+} else{
+    console.log("Thanks for playing!");
+}
+
+
 }
