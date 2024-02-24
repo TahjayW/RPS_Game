@@ -7,21 +7,26 @@ General outline :
 Define win/loss/draw state.
 Need exceptions for failed/empty inputs.
 Get a CPU to pick one of three choices randomly. 
+Convert CPU choices to be comparable to 
+playerChoices.
 Compare result with player choice.
 Display results with prompt.
 
-
-PC:
+Pseudo:
 
 BEGIN
+{
+
+
     GET user input
-    let text = user Input;
+    let playerChoice = promptValue;
     let cpuChoice = CPU_CHOICE();
-    if isInputValid(text)
+    
+    if isInputValid(playerChoice)
     {
         
     }
-
+    Check if user input is valid>
     function isInputValid(someInput){
         if(someInput is 'string' AND someInput ISNOT empty) 
         THEN    return true;
@@ -30,10 +35,10 @@ BEGIN
             print "Invalid entry"    
             return false;
     }
-
+    Random int return value
     function CPU_CHOICE(){
-        let cpuChoice = random number 1-3
-        return cpuChoice;
+        let x = random number 1-3
+        return x;
     }
     
         
@@ -50,18 +55,26 @@ BEGIN
     }
 
     Define wins with strings
-    function choice_Evaluation()
-        let playerChoice = PLAYER_CHOICE();
-        let cpuChoice = CPU_CHOICE();
+    function choice_Evaluation(playerChoice,cpuChoice)
+        
+    A>B B>C C>A 
 
-        switch 
-            case 1
-            return 'rock'
-            break;
-            case 2
-            break; 
-            return 'paper'
-            case 3
-            break; 
-            return 'scisscors'
-            break;
+    Compare two values
+    are they the same?
+    YES then draw
+    if not
+
+    if playerChoice is A and cpu Choice is B
+    OR 
+     if playerChoice is B and CPU choice is C
+    OR
+    if playerChoice is C and CPU choice is A
+
+    then player wins
+    return winstate
+
+    else
+    player loses
+    return loss state
+
+}
