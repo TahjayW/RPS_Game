@@ -20,7 +20,7 @@ function startGame() {
     let convertedPlayerChoice = convert_Choice();
     //Check user input is valid
     if (isInputValid(playerChoice)) {
-        
+
         compareChoice(convert_Choice(playerChoice), cpuChoice);
     } else {
         startGame();
@@ -30,7 +30,17 @@ function startGame() {
 }
 
 function convert_Choice(x) {
+    let convertedChoice;
+    if (x === 'rock') {
+        convertedChoice = 0;
+    } else if (x === 'paper') {
+        convertedChoice = 1;
 
+    } else {
+        convertedChoice = 2;
+
+    }
+    return convertedChoice;
 }
 
 function CPU_Choice() {
@@ -54,7 +64,7 @@ function isInputValid(someInput) {
 function compareChoice(a, b) {
     if (a === b) {
         console.log("draw!");
-    } else if ((a === 0 && b === 1) || (a === 1 && b === 2) || (a === 2 && b === 0)) {
+    } else if ((a === 1 && b === 0) || (a === 2 && b === 1) || (a === 0 && b === 2)) {
         console.log("Player wins!");
     } else {
         console.log("Player Loses!");
