@@ -23,7 +23,7 @@ if (timeToPlay.toLocaleLowerCase() === 'yes') {
 
 function startGame() {
     //Loop function until 5rounds
-    while (totalRounds < 5) {
+    while (totalRounds < 5 && cpuWins <3 && playerWins <3) {
         //Assign values for RPS
          playerChoice = prompt("Type rock, paper or scissors.");
 
@@ -57,7 +57,7 @@ function startGame() {
     } else if (playerWins < cpuWins) {
         console.log(`The cpu won ${cpuWins} rounds out of ${totalRounds}! Better luck next time!`);
     } else {
-        console.log("Draw!");
+        console.log(`You won ${playerWins} times! CPU won ${cpuWins} times! Draw!`);
     }
 
 }
