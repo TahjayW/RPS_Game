@@ -53,9 +53,9 @@ function startGame() {
     }
 
     if (playerWins > cpuWins) {
-        console.log("You win!");
+        console.log(`You won ${playerWins} rounds out of ${totalRounds}! Well done!`);
     } else if (playerWins < cpuWins) {
-        console.log("You lose!");
+        console.log(`The cpu won ${cpuWins} rounds out of ${totalRounds}! Better luck next time!`);
     } else {
         console.log("Draw!");
     }
