@@ -3,6 +3,53 @@
 //Get Input
 //
 
+//Revisting with UI March 30th 2024
+
+
+//Creating Divs 
+const body = document.querySelector("body");
+const divContainer = document.createElement("div");
+
+//Buttons
+const btnRock = document.createElement("button");
+const btnScissors = document.createElement("button");
+const btnPaper = document.createElement("button");
+divContainer.append(btnPaper, btnRock, btnScissors);
+//Score Display
+const divScoreDisplay = document.createElement("div");
+const divCPUScore = document.createElement("div");
+const divPlayerScore = document.createElement("div");
+
+
+//Events 
+divContainer.addEventListener("click", (event)=> {
+    let target = event.target;
+
+    switch(target.id){
+    case 'btnRock':
+        playerChoice = 'rock';
+        
+        break;
+    case 'btnScissors':
+        playerChoice  = 'scissors';
+        break;
+    case 'btnPaper':
+        playerChoice = 'paper';
+        break;    
+
+    }
+    //Run Comparison Logic Here
+    compareChoice(convertedChoice(playerChoice),CPU_Choice());
+
+    //Update divScore values here
+
+
+});
+
+body.append(divContainer);
+
+
+
 //Win Conditions 
 //False winState = CPU win, True winState = playerWin
 let playerWins = 0;
@@ -11,32 +58,22 @@ let totalRounds = 0;
 let winState = new Boolean;
 let drawState = new Boolean;
 let cpuConvertedChoice = "";
-let playerChoice ="";
-let timeToPlay = prompt("Would you like to play ? Yes or No", "yes");
-if (timeToPlay.toLocaleLowerCase() === 'yes') {
-    console.log("sick");
-    startGame();
+let playerChoice = "";
 
-} else {
-    console.log("Aight then, tootles.");
-}
+startGame();
+
+
+
 
 function startGame() {
-    //Loop function until 5rounds
-    while (totalRounds < 5 && cpuWins <3 && playerWins <3) {
-        //Assign values for RPS
-         playerChoice = prompt("Type rock, paper or scissors.");
+//Loop function until 5rounds
+//  while (totalRounds < 5 && cpuWins < 3 && playerWins < 3) {
+//Assign values for RPS
+        
 
-
-        //Check user input is valid
-        if (isInputValid(playerChoice)) {
-            let convertedPlayerChoice = convert_Choice(playerChoice);
-            let cpuChoice = CPU_Choice();
-            compareChoice(convertedPlayerChoice, cpuChoice);
-        } else {
-            console.log("Invalid entry, please try again.");
-            startGame();
-        }
+        
+        
+        
         //Increment while Loop
         if (drawState) {
             console.log("No points awarded this round!");
@@ -48,18 +85,19 @@ function startGame() {
         } else if (!winState) {
             comparisonResult();
             cpuWins++;
-        }
-        totalRounds++;
-    }
 
-    if (playerWins > cpuWins) {
+        }
+        //totalRounds++;
+    
+
+  /*  if (playerWins > cpuWins) {
         console.log(`You won ${playerWins} rounds out of ${totalRounds}! Well done!`);
     } else if (playerWins < cpuWins) {
         console.log(`The cpu won ${cpuWins} rounds out of ${totalRounds}! Better luck next time!`);
     } else {
         console.log(`You won ${playerWins} times! CPU won ${cpuWins} times! Draw!`);
     }
-
+*/
 }
 
 function convert_Choice(playerChoice) {
@@ -93,30 +131,17 @@ function CPU_Choice() {
 }
 
 
-function isInputValid(someInput) {
-    if (typeof someInput === 'string' && someInput.length != 0) {
-        if (someInput.toLowerCase() === 'rock' || someInput.toLowerCase() === 'paper' || someInput.toLowerCase() === 'scissors') {
-            return true;
-        }
 
-    }
-    else {
-        console.log("Invalid entry, please try again.");
-        return false;
-    }
 
-}
-
-//a = player choice b = cpu choice
 // 0 rock 1 paper 2 scisscors
-function compareChoice(a, b) {
+function compareChoice(playerChoice, cpuChoice) {
     drawState = false;
     winState = false;
 
-    if (a === b) {
+    if (playerChoice === cpuChoice) {
         console.log("draw!");
         return drawState = true;
-    } else if ((a === 1 && b === 0) || (a === 2 && b === 1) || (a === 0 && b === 2)) {
+    } else if ((playerChoice === 1 && cpuChoice === 0) || (playerChoice === 2 && cpuChoice === 1) || (playerChoice === 0 && cpuChoice === 2)) {
         console.log("Player wins!");
         winState = true;
     } else {
@@ -128,11 +153,13 @@ function compareChoice(a, b) {
 
 function comparisonResult() {
     if (playerWins) {
-        console.log(`${playerChoice} beats ${cpuConvertedChoice}! Player wins this round!`);
+        //Change this to a method console.log(`${playerChoice} beats ${cpuConvertedChoice}! Player wins this round!`);
+        divPlayerScore.textContent++;
     }
     else (!playerWins)
     {
-        console.log(`${cpuConvertedChoice} beats ${playerChoice}! CPU wins this round!`);
+        //Change this to a method  console.log(`${cpuConvertedChoice} beats ${playerChoice}! CPU wins this round!`);
+        divCPUScore.textContent++;
     }
 
 }
