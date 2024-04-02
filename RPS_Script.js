@@ -38,7 +38,7 @@ divContainer.append(divScoreDisplay);
 
 //Messaging
 const divMessage = document.createElement("div");
-
+body.append(divMessage);
 
 
 
@@ -84,48 +84,9 @@ let cpuWins = 0;
 let totalRounds = 0;
 let winState = new Boolean;
 let drawState = new Boolean;
-let cpuConvertedChoice = "";
 let playerChoice = "";
 
-startGame();
 
-
-
-
-function startGame() {
-    //Loop function until 5rounds
-    //  while (totalRounds < 5 && cpuWins < 3 && playerWins < 3) {
-    //Assign values for RPS
-
-
-
-
-
-    //Increment while Loop
-    //if (drawState) {
-    //   console.log("No points awarded this round!");
-
-    //}
-    //else if (winState) {
-    //   comparisonResult();
-    // playerWins++;
-    //} else if (!winState) {
-    //  comparisonResult();
-    // cpuWins++;
-
-    //}
-    //totalRounds++;
-
-
-    /*  if (playerWins > cpuWins) {
-          console.log(`You won ${playerWins} rounds out of ${totalRounds}! Well done!`);
-      } else if (playerWins < cpuWins) {
-          console.log(`The cpu won ${cpuWins} rounds out of ${totalRounds}! Better luck next time!`);
-      } else {
-          console.log(`You won ${playerWins} times! CPU won ${cpuWins} times! Draw!`);
-      }
-  */
-}
 
 function convert_Choice(playerChoice) {
     let convertedChoice;
@@ -156,14 +117,14 @@ function compareChoice(playerChoice, cpuChoice) {
     winState = false;
 
     if (playerChoice === cpuChoice) {
-        divMessage.textContent = "draw!";
+        say(divMessage, "Draw!");
 
         return drawState = true;
     } else if ((playerChoice === 1 && cpuChoice === 0) || (playerChoice === 2 && cpuChoice === 1) || (playerChoice === 0 && cpuChoice === 2)) {
-        divMessage.textContent = "Player wins!";
+        say(divMessage, "Player wins!");
         winState = true;
     } else {
-        divMessage.textContent = "CPU Wins!";
+        say(divMessage, "CPU Wins!");
         winState = false;
     }
 
@@ -179,15 +140,3 @@ function compareChoice(playerChoice, cpuChoice) {
 
 }
 
-function comparisonResult() {
-    if (playerWins) {
-        //Change this to a method console.log(`${playerChoice} beats ${cpuConvertedChoice}! Player wins this round!`);
-
-    }
-    else (!playerWins)
-    {
-        //Change this to a method  console.log(`${cpuConvertedChoice} beats ${playerChoice}! CPU wins this round!`);
-
-    }
-
-}
