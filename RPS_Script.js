@@ -12,34 +12,61 @@ const divContainer = document.createElement("div");
 
 //Buttons
 const btnRock = document.createElement("button");
+btnRock.textContent = "Rock";
 const btnScissors = document.createElement("button");
+btnScissors.textContent = "Scissors";
 const btnPaper = document.createElement("button");
+btnPaper.textContent = "Paper";
+
 divContainer.append(btnPaper, btnRock, btnScissors);
+
+
 //Score Display
 const divScoreDisplay = document.createElement("div");
+say(divScoreDisplay, "Display To Contain cpu/player Scores.");
 const divCPUScore = document.createElement("div");
+say(divCPUScore, "CPU Score Here");
 const divPlayerScore = document.createElement("div");
+say(divPlayerScore, "Player score here");
+
+
+divScoreDisplay.append(divCPUScore, divPlayerScore);
+divContainer.append(divScoreDisplay);
+
+
+
+
+//Messaging
+const divMessage = document.createElement("div");
+
+
+
+
+//Ease of use
+function say(aDiv, text) {
+    aDiv.textContent = text;
+}
 
 
 //Events 
-divContainer.addEventListener("click", (event)=> {
+divContainer.addEventListener("click", (event) => {
     let target = event.target;
 
-    switch(target.id){
-    case 'btnRock':
-        playerChoice = 'rock';
-        
-        break;
-    case 'btnScissors':
-        playerChoice  = 'scissors';
-        break;
-    case 'btnPaper':
-        playerChoice = 'paper';
-        break;    
+    switch (target.id) {
+        case 'btnRock':
+            playerChoice = 'rock';
+
+            break;
+        case 'btnScissors':
+            playerChoice = 'scissors';
+            break;
+        case 'btnPaper':
+            playerChoice = 'paper';
+            break;
 
     }
     //Run Comparison Logic Here
-    compareChoice(convertedChoice(playerChoice),CPU_Choice());
+    compareChoice(convert_Choice(playerChoice), CPU_Choice());
 
     //Update divScore values here
 
@@ -66,38 +93,38 @@ startGame();
 
 
 function startGame() {
-//Loop function until 5rounds
-//  while (totalRounds < 5 && cpuWins < 3 && playerWins < 3) {
-//Assign values for RPS
-        
+    //Loop function until 5rounds
+    //  while (totalRounds < 5 && cpuWins < 3 && playerWins < 3) {
+    //Assign values for RPS
 
-        
-        
-        
-        //Increment while Loop
-        if (drawState) {
-            console.log("No points awarded this round!");
 
-        }
-        else if (winState) {
-            comparisonResult();
-            playerWins++;
-        } else if (!winState) {
-            comparisonResult();
-            cpuWins++;
 
-        }
-        //totalRounds++;
-    
 
-  /*  if (playerWins > cpuWins) {
-        console.log(`You won ${playerWins} rounds out of ${totalRounds}! Well done!`);
-    } else if (playerWins < cpuWins) {
-        console.log(`The cpu won ${cpuWins} rounds out of ${totalRounds}! Better luck next time!`);
-    } else {
-        console.log(`You won ${playerWins} times! CPU won ${cpuWins} times! Draw!`);
-    }
-*/
+
+    //Increment while Loop
+    //if (drawState) {
+    //   console.log("No points awarded this round!");
+
+    //}
+    //else if (winState) {
+    //   comparisonResult();
+    // playerWins++;
+    //} else if (!winState) {
+    //  comparisonResult();
+    // cpuWins++;
+
+    //}
+    //totalRounds++;
+
+
+    /*  if (playerWins > cpuWins) {
+          console.log(`You won ${playerWins} rounds out of ${totalRounds}! Well done!`);
+      } else if (playerWins < cpuWins) {
+          console.log(`The cpu won ${cpuWins} rounds out of ${totalRounds}! Better luck next time!`);
+      } else {
+          console.log(`You won ${playerWins} times! CPU won ${cpuWins} times! Draw!`);
+      }
+  */
 }
 
 function convert_Choice(playerChoice) {
@@ -116,17 +143,7 @@ function convert_Choice(playerChoice) {
 
 function CPU_Choice() {
     let x = Math.floor(Math.random() * 3);
-    switch (x) {
-        case 0:
-            cpuConvertedChoice = "rock";
-            break;
-        case 1:
-            cpuConvertedChoice = "paper";
-            break;
-        case 2:
-            cpuConvertedChoice = "scissors";
-            break;
-    }
+
     return x;
 }
 
@@ -139,14 +156,25 @@ function compareChoice(playerChoice, cpuChoice) {
     winState = false;
 
     if (playerChoice === cpuChoice) {
-        console.log("draw!");
+        divMessage.textContent = "draw!";
+
         return drawState = true;
     } else if ((playerChoice === 1 && cpuChoice === 0) || (playerChoice === 2 && cpuChoice === 1) || (playerChoice === 0 && cpuChoice === 2)) {
-        console.log("Player wins!");
+        divMessage.textContent = "Player wins!";
         winState = true;
     } else {
-        console.log("Player Loses!");
+        divMessage.textContent = "CPU Wins!";
         winState = false;
+    }
+
+    
+    if (winState) {
+        playerWins++;
+        say(divPlayerScore, "Player Score is " + playerWins);
+    } else {
+        cpuWins++;
+        say(divCPUScore, "CPU score is " + cpuWins);
+        
     }
 
 }
@@ -154,12 +182,12 @@ function compareChoice(playerChoice, cpuChoice) {
 function comparisonResult() {
     if (playerWins) {
         //Change this to a method console.log(`${playerChoice} beats ${cpuConvertedChoice}! Player wins this round!`);
-        divPlayerScore.textContent++;
+
     }
     else (!playerWins)
     {
         //Change this to a method  console.log(`${cpuConvertedChoice} beats ${playerChoice}! CPU wins this round!`);
-        divCPUScore.textContent++;
+
     }
 
 }
